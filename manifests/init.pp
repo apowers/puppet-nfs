@@ -6,6 +6,16 @@ class nfs {
     ],
   }
 
+  $service = $::operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'rpcbind' ],
+  }
+
   package { $required: ensure  => latest }
+
+  service { $service:
+    ensure => 'running',
+    enable => 'true',
+    require => Package[$service],
+  }
 
 }
