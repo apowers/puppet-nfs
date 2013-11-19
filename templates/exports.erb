@@ -1,6 +1,6 @@
 # MANAGED BY PUPPET!
 <% if exports and ! exports.empty? -%>
-<%= exports.each do |key, value| -%>
-<%= key %> <%= value %>
+<% exports.each do |exp| -%>
+<%= exp %>
 <% end -%>
 <% end -%>
