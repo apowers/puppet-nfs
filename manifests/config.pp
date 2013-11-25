@@ -1,9 +1,8 @@
-define nfs::server (
-  $exports = ''
+# NFS Server Configuration
+class nfs::config (
+  $exports = $nfs::exports,
+  $config  = $ntp::params::config
 ) {
-  $config = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => '/etc/exports',
-  }
 
   file { $config:
     ensure  => present,
@@ -13,7 +12,8 @@ define nfs::server (
     content => template('nfs/exports.erb'),
   }
 
-  exec { '/usr/sbin/exportfs -a':
+  exec {  'reload_nfs_exports_from_file':
+    command     => '/usr/sbin/exportfs -a',
     alias       => 'exportfs',
     refreshonly => true,
     subscribe   => File[$config],

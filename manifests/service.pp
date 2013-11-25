@@ -1,14 +1,14 @@
 define nfs::service (
-  $ensure = running,
-  $enable = true
+  $ensure = $nfs::service_ensure,
+  $enable = $nfs::service_enable
 ) {
-  $service = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'nfs' ],
-  }
+  include 'nfs::params'
+  $services = $nfs::params::services
 
-  service { $service:
+  service { $services:
     ensure => $ensure,
     enable => $enable,
+    require => Package[$service],
   }
 
 }

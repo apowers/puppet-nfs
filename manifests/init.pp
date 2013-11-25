@@ -1,21 +1,21 @@
-class nfs {
-  $required = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [
-      'nfs-utils',
-      'rpcbind'
-    ],
-  }
+# NFS Class
+#
+class nfs (
+  $role           = 'client',
+  $exports        = [],
+  $package_ensure = 'installed',
+  $service_ensure = 'running',
+  $service_enable = true,
+) {
 
-  $service = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'rpcbind' ],
-  }
+  class { 'nfs::params' }
+  -> class { 'nfs::package' }
 
-  package { $required: ensure  => latest }
-
-  service { $service:
-    ensure => 'running',
-    enable => 'true',
-    require => Package[$service],
+  if $role == 'server' {
+    class { 'nfs::config'
+      require => Class['nfs::package']
+    }
+    -> class { 'nfs::service' }
   }
 
 }
