@@ -1,21 +1,15 @@
 # NFS Class
 #
 class nfs (
-  $role           = 'client',
-  $exports        = [],
   $package_ensure = 'installed',
-  $service_ensure = 'running',
+  $service_ensure = 'stopped',
   $service_enable = true,
+  $exports        = []
 ) {
 
-  class { 'nfs::params' }
-  -> class { 'nfs::package' }
-
-  if $role == 'server' {
-    class { 'nfs::config'
-      require => Class['nfs::package']
-    }
-    -> class { 'nfs::service' }
-  }
+  class { 'nfs::params': }
+  -> class { 'nfs::package': }
+  -> class { 'nfs::config': }
+  -> class { 'nfs::service': }
 
 }
