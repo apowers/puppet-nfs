@@ -1,7 +1,7 @@
 # NFS Server Configuration
 class nfs::config (
   $exports = $nfs::exports,
-  $config  = $ntp::params::config
+  $config  = $nfs::params::config
 ) {
 
   file { $config:

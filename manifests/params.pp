@@ -1,17 +1,15 @@
 # NFS Default Parameters
 class nfs::params {
   $packages = $::osfamily ? {
-    /(?i-mx:redhat|scientific)/ => ['nfs-utils','rpcbind'],
-    /(?i-mx:debian)/            => ['nfs-kernel-server','rpcbind']
+    'RedHat'  => ['nfs-utils','rpcbind'],
+    'Debian'  => ['nfs-kernel-server','portmap']
   }
 
   $services = $::osfamily ? {
-    /(?i-mx:redhat|scientific)/ => ['rpcbind','nfs'],
-    /(?i-mx:debian)/ => ['rpcbind','nfs'],
+    'RedHat'  => ['nfs-utils','rpcbind'],
+    'Debian'  => ['nfs-kernel-server','portmap']
   }
 
-  $config = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => '/etc/exports',
-  }
+  $config = '/etc/exports'
 
 }
