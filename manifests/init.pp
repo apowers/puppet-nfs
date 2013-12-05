@@ -1,15 +1,19 @@
 # NFS Class
 #
 class nfs (
-  $package_ensure = 'installed',
-  $service_ensure = 'stopped',
-  $service_enable = true,
-  $exports        = []
+  $package_ensure     = 'installed',
+  $service_ensure     = 'stopped',
+  $service_enable     = true,
+  $exports            = [],
+  $mountd_port        = undef,
+  $statd_port         = undef,
+  $lockd_port         = undef,
+  $sysconfig_options  = [],
 ) {
 
-  class { 'nfs::params': }
-  -> class { 'nfs::package': }
-  -> class { 'nfs::config': }
-  -> class { 'nfs::service': }
+  class { 'nfs::params': } ->
+  class { 'nfs::package': } ->
+  class { 'nfs::config': } ~>
+  class { 'nfs::service': }
 
 }

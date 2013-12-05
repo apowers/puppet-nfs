@@ -1,0 +1,10 @@
+# This file is managed by Puppet.
+# Local changes will be automatically reverted.
+<% if @mountd_port %>
+RPCMOUNTDOPTS="--manage-gids --port <%= @mountd_port %>"
+<% else %>
+RPCMOUNTDOPTS="--manage-gids"
+<% end %>
+
+<% @sysconfig_options.each do |option| %>
+<%= option %><% end %>
