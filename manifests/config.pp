@@ -33,11 +33,11 @@ class nfs::config (
       }
     }
     'Debian': {
-      file { '/etc/defaults/nfs-kernel-server':
-        content => template('nfs/nfs-kernel-server_defaults.erb')
+      file { '/etc/default/nfs-kernel-server':
+        content => template('nfs/nfs-kernel-server.erb')
       }
-      file { '/etc/defaults/nfs-common':
-        content => template('nfs/nfs-common_defaults.erb')
+      file { '/etc/default/nfs-common':
+        content => template('nfs/nfs-common.erb')
       }
     }
     default: {}
