@@ -7,7 +7,7 @@ class nfs::config (
   $sysconfig_options  = $nfs::sysconfig_options,
 ) {
   include nfs::params
-  ensure_array($sysconfig_options)
+  validate_array($sysconfig_options)
 
   $config = $nfs::params::config
 
