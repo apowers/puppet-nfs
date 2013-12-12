@@ -7,9 +7,17 @@ class nfs::service (
   $services = $nfs::params::services
   $packages = $nfs::params::packages
 
+  $client_services = $nfs::params::client_services
+
   service { $services:
     ensure  => $ensure,
     enable  => $enable,
+    require => Package[$packages],
+  }
+
+  service { $client_services:
+    ensure  => 'running',
+    enable  => true,
     require => Package[$packages],
   }
 

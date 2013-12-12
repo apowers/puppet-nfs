@@ -6,8 +6,13 @@ class nfs::params {
   }
 
   $services = $::osfamily ? {
-    'RedHat'  => ['nfs-utils','rpcbind'],
+    'RedHat'  => ['nfs', 'nfslock', 'rpcbind'],
     'Debian'  => ['nfs-kernel-server','statd']
+  }
+
+  $client_services = $::osfamily ? {
+    'RedHat'  => ['rpcbind'],
+    'Debian'  => ['statd']
   }
 
   $config = '/etc/exports'
