@@ -15,10 +15,4 @@ class nfs::service (
     require => Package[$packages],
   }
 
-  service { $client_services:
-    ensure  => 'running',
-    enable  => true,
-    require => Package[$packages],
-  }
-
 }

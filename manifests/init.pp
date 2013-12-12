@@ -2,7 +2,7 @@
 #
 class nfs (
   $package_ensure     = 'installed',
-  $service_ensure     = 'stopped',
+  $service_ensure     = 'running',
   $service_enable     = true,
   $exports            = [],
   $mountd_port        = undef,
