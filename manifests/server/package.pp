@@ -1,10 +1,9 @@
 # Install NFS Packages
 class nfs::package (
-  $ensure = $nfs::package_ensure
+  $ensure   = $nfs::server::package_ensure,
+  $packages = $nfs::server::packages,
 ) {
-  include 'nfs::params'
 
-  $packages = $nfs::params::packages
   package { $packages: ensure  => $ensure }
 
 }

@@ -1,10 +1,10 @@
 # NFS Server Configuration
 class nfs::config (
-  $exports            = $nfs::exports,
-  $mountd_port        = $nfs::mountd_port,
-  $statd_port         = $nfs::statd_port,
-  $lockd_port         = $nfs::lockd_port,
-  $sysconfig_options  = $nfs::sysconfig_options,
+  $exports            = $nfs::server::exports,
+  $mountd_port        = $nfs::server::mountd_port,
+  $statd_port         = $nfs::server::statd_port,
+  $lockd_port         = $nfs::server::lockd_port,
+  $sysconfig_options  = $nfs::server::sysconfig_options,
 ) {
   include nfs::params
   validate_array($sysconfig_options)
