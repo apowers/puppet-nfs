@@ -11,9 +11,14 @@ class nfs (
   $sysconfig_options  = [],
 ) {
 
-  class { 'nfs::params': } ->
-  class { 'nfs::package': } ->
-  class { 'nfs::config': } ~>
-  class { 'nfs::service': }
+  class { 'nfs::client':
+    package_ensure     => $package_ensure,
+    service_ensure     => $service_ensure,
+    service_enable     => $service_enable,
+    mountd_port        => $mountd_port,
+    statd_port         => $statd_port,
+    lockd_port         => $lockd_port,
+    sysconfig_options  => $sysconfig_options,
+  }
 
 }

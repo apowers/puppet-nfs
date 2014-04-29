@@ -10,6 +10,11 @@ class nfs::params {
     'Debian'  => ['nfs-kernel-server','statd']
   }
 
+  $client_service_name = $::osfamily ? {
+    'RedHat'  => ['nfslock'],
+    'Debian'  => ['statd']
+  }
+
   $config = '/etc/exports'
 
 }

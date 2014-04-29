@@ -6,7 +6,7 @@ define nfs::mount (
   $atboot   = true,
 ) {
 
-  ensure_resource('file',$mount,ensure=>'directory')
+  ensure_resource('file',$mount,{ensure => 'directory'})
 
   mount { $mount:
     ensure    => 'mounted',
